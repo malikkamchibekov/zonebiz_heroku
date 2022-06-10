@@ -64,8 +64,12 @@
 					<li class="nav-item">
 						<a class="nav-link" href="{% url 'about' %}">About</a>
 					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="{% url 'services' %}">Services</a>
+					<li class="nav-item dropdown">
+						<a class="nav-link" href="#" id="navbarDropdownBlog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Services <i class="fas fa-sort-down"></i></a>
+						<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
+							<a class="dropdown-item" href="{% url 'services' %}">Services</a>
+							<a class="dropdown-item" href="{% url 'create_service' %}">Create Service</a>
+						</div>
 					</li>
 					<li class="nav-item dropdown">
 						<a class="nav-link" href="#" id="navbarDropdownBlog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pages <i class="fas fa-sort-down"></i></a>

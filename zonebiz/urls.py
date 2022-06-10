@@ -14,6 +14,8 @@ urlpatterns = [
     path('portfolio-item/', portfolio_item, name='portfolio-item'),
     path('blog/', blog, name='blog'),
     path('blog-post/', blog_post, name='blog-post'),
-    path('contact/', contact, name='contact')
+    path('contact/', contact, name='contact'),
+    path('create_service/', create_service, name='create_service'),
+
 ]
 

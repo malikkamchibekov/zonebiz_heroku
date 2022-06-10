@@ -1,8 +1,16 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+
+from .forms import ServiceForm
+from .models import Service, Blog
 
 
 def index(request):
-    return render(request, 'zonebiz/index.html')
+    blogs = Blog.objects.all()
+    context = {
+        'blogs': blogs,
+
+    }
+    return render(request, 'zonebiz/index.html', context)
 
 
 def error(request):
@@ -14,7 +22,8 @@ def about(request):
 
 
 def blog(request):
-    return render(request, 'zonebiz/blog.html')
+    blogs = Blog.objects.all()
+    return render(request, 'zonebiz/blog.html', {'blogs': blogs})
 
 
 def blog_post(request):
@@ -46,4 +55,16 @@ def pricing(request):
 
 
 def services(request):
-    return render(request, 'zonebiz/services.html')
+    services = Service.objects.all()
+    return render(request, 'zonebiz/services.html', {'services': services})
+
+
+def create_service(request):
+    if request.method == 'POST':
+        form = ServiceForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('/')
+    else:
+        form = ServiceForm()
+    return render(request, 'zonebiz/create_service.html', {'form': form})
