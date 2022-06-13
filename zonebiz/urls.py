@@ -16,6 +16,7 @@ urlpatterns = [
     path('blog-post/', blog_post, name='blog-post'),
     path('contact/', contact, name='contact'),
     path('create_service/', create_service, name='create_service'),
+    path('login/', login_user, name='login'),
+    path('registration', registration, name='registration'),
 
 ]
-

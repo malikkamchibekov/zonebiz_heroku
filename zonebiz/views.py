@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
-
-from .forms import ServiceForm
+from .forms import ServiceForm, UserLoginForm
 from .models import Service, Blog
-
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib import messages
+from django.contrib.auth import login, logout
 
 def index(request):
     blogs = Blog.objects.all()
@@ -68,3 +69,33 @@ def create_service(request):
     else:
         form = ServiceForm()
     return render(request, 'zonebiz/create_service.html', {'form': form})
+
+
+def login_user(request):
+    if request.method == 'POST':
+        form = UserLoginForm(data=request.POST)
+        if form.is_valid():
+            user = form.get_user()
+            login(request, user)
+            messages.success(request, 'Welcome!')
+            return redirect('/')
+        else:
+            messages.error(request, 'Something gone wrong(')
+    else:
+        form = UserLoginForm()
+
+    return render(request, 'zonebiz/login.html', {'form': form})
+
+
+def registration(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('login')
+        else:
+            messages.error(request, 'Something gone wrong(')
+    else:
+        form = UserCreationForm()
+
+    return render(request, 'zonebiz/registration.html', {'form': form})
